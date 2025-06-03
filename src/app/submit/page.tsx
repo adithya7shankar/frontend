@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Button from '@/components/Button'; // Import the Button component
 
 interface Topic {
   id: string;
@@ -224,13 +225,15 @@ const SubmitCommentaryPage = () => {
         {successMessage && <p className="text-green-600 text-md text-center bg-green-100 p-3 rounded-lg">{successMessage}</p>}
 
         <div className="pt-4"> {/* Added padding top for button spacing */}
-          <button
+          <Button
             type="submit"
+            variant="primary"
+            size="lg"
             disabled={isSubmitting}
-            className="w-full bg-calm-blue-accent hover:bg-calm-blue-accent-hover text-white font-semibold py-4 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 ease-in-out text-lg disabled:opacity-60" // Larger button, new colors
+            className="w-full" // Make button full width
           >
             {isSubmitting ? 'Submitting Reflection...' : 'Publish Your Reflection'}
-          </button>
+          </Button>
         </div>
       </form>
     </div>

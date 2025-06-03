@@ -1,3 +1,5 @@
+import Button from '@/components/Button'; // Import the new Button component
+
 export default function Home() {
   return (
     <div className="space-y-16"> {/* Increased spacing between sections */}
@@ -8,12 +10,9 @@ export default function Home() {
         <p className="text-xl text-warm-text-secondary mb-10 font-serif"> {/* Serif for descriptive text, larger */}
           A space for thoughtful discussion and reflection on news from around the world.
         </p>
-        <a
-          href="/submit"
-          className="bg-calm-blue-accent hover:bg-calm-blue-accent-hover text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 ease-in-out text-lg" // Larger button, new colors
-        >
+        <Button href="/submit" size="lg" variant="primary">
           Share Your Reflection
-        </a>
+        </Button>
       </section>
 
       <section className="py-12">
