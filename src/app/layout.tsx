@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // Using Inter as a common, clean font
+import { Inter, Lora } from "next/font/google"; // Import Lora
 import "./globals.css";
 import Layout from "@/components/Layout"; // Import the new Layout component
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const lora = Lora({ subsets: ["latin"], variable: "--font-lora", weight: ["400", "700"] }); // Add Lora
 
 export const metadata: Metadata = {
   title: "NewsReflect - Thoughtful News Discussion",
@@ -16,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable}`}>
-      <body className="font-sans antialiased"> {/* Use a generic font class */}
+    <html lang="en" className={`${inter.variable} ${lora.variable}`}>
+      <body className="font-sans antialiased bg-warm-bg text-warm-text-primary">
         <Layout>{children}</Layout>
       </body>
     </html>

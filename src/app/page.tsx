@@ -1,32 +1,32 @@
 export default function Home() {
   return (
-    <div>
-      <section className="text-center py-12">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">
+    <div className="space-y-16"> {/* Increased spacing between sections */}
+      <section className="text-center py-16"> {/* Increased padding */}
+        <h1 className="text-5xl font-bold text-warm-text-primary mb-6"> {/* Larger, primary text color */}
           Welcome to NewsReflect
         </h1>
-        <p className="text-lg text-gray-600 mb-8">
-          A place for thoughtful discussion and reflection on news from around the world.
+        <p className="text-xl text-warm-text-secondary mb-10 font-serif"> {/* Serif for descriptive text, larger */}
+          A space for thoughtful discussion and reflection on news from around the world.
         </p>
         <a
           href="/submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-150 ease-in-out"
+          className="bg-calm-blue-accent hover:bg-calm-blue-accent-hover text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 ease-in-out text-lg" // Larger button, new colors
         >
-          Share Your Commentary
+          Share Your Reflection
         </a>
       </section>
 
-      <section className="py-10">
-        <h2 className="text-3xl font-semibold text-gray-700 mb-6">Trending Topics</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="py-12">
+        <h2 className="text-4xl font-semibold text-warm-text-primary mb-8 text-center">Explore Perspectives by Topic</h2> {/* Centered, larger */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"> {/* Increased gap */}
           {/* Placeholder for Topic Cards */}
           {['AI Ethics', 'Climate Solutions', 'Future of Work'].map((topic) => (
-            <div key={topic} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200">
-              <h3 className="text-xl font-semibold text-blue-600 mb-2">{topic}</h3>
-              <p className="text-gray-600 text-sm">
+            <div key={topic} className="bg-warm-surface p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-warm-border-soft"> {/* Softer shadow, border, rounded-xl */}
+              <h3 className="text-2xl font-semibold text-calm-blue-accent mb-3">{topic}</h3>
+              <p className="text-warm-text-secondary text-md mb-4 font-serif"> {/* Serif for description */}
                 Explore commentaries and discussions related to {topic.toLowerCase()}.
               </p>
-              <a href="#" className="text-blue-500 hover:underline mt-4 inline-block">
+              <a href="#" className="text-calm-blue-accent hover:text-calm-blue-accent-hover font-semibold transition-colors">
                 View Topic &rarr;
               </a>
             </div>
@@ -34,25 +34,25 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-10">
-        <h2 className="text-3xl font-semibold text-gray-700 mb-6">Recent Commentaries</h2>
+      <section className="py-12">
+        <h2 className="text-4xl font-semibold text-warm-text-primary mb-8 text-center">Recent Reflections</h2> {/* Centered, larger */}
         {/* Placeholder for Commentary List/Cards */}
-        <div className="space-y-6">
+        <div className="space-y-8"> {/* Increased gap */}
           {[
             { title: 'The Impact of AI on Creative Industries', author: 'Alice Reflector', topic: 'AI Ethics' },
             { title: 'Renewable Energy: A Path to Sustainability', author: 'Bob Thinker', topic: 'Climate Solutions' },
             { title: 'Navigating the Gig Economy', author: 'Charlie Savant', topic: 'Future of Work' },
           ].map((commentary) => (
-            <div key={commentary.title} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200">
-              <h3 className="text-xl font-semibold text-gray-800 mb-1">{commentary.title}</h3>
-              <p className="text-sm text-gray-500 mb-2">
-                By <span className="font-medium">{commentary.author}</span> in <span className="text-blue-600">{commentary.topic}</span>
+            <div key={commentary.title} className="bg-warm-surface p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-warm-border-soft"> {/* Softer shadow, border */}
+              <h3 className="text-2xl font-semibold text-warm-text-primary mb-2">{commentary.title}</h3>
+              <p className="text-md text-warm-text-secondary mb-3">
+                By <span className="font-semibold text-calm-blue-accent">{commentary.author}</span> in <span className="font-semibold text-calm-blue-accent">{commentary.topic}</span>
               </p>
-              <p className="text-gray-700 line-clamp-3">
+              <p className="text-warm-text-primary font-serif text-lg leading-relaxed line-clamp-4 mb-4"> {/* Serif for commentary, larger, more line height */}
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...
               </p>
-              <a href="#" className="text-blue-500 hover:underline mt-4 inline-block">
-                Read More &rarr;
+              <a href="#" className="text-calm-blue-accent hover:text-calm-blue-accent-hover font-semibold transition-colors">
+                Read Full Reflection &rarr;
               </a>
             </div>
           ))}

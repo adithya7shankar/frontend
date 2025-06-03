@@ -56,7 +56,7 @@ const SubmitCommentaryPage = () => {
     }
 
     // Placeholder for user_id, this will come from auth
-    const placeholderUserId = 'user_placeholder_id';
+    const placeholderUserId = 'user1'; // Changed to a valid seeded user ID
 
     if (!mainArticleEmbed && mainArticleUrl) { // Check if URL is entered but embed not loaded
       setError('Please wait for the article preview to load, or ensure the URL is correct.');
@@ -108,7 +108,11 @@ const SubmitCommentaryPage = () => {
   };
 
   const handleFetchEmbed = async () => {
-    if (!mainArticleUrl) return;
+    console.log('handleFetchEmbed called. URL:', mainArticleUrl); // Debug log
+    if (!mainArticleUrl) {
+      console.log('mainArticleUrl is empty, returning.');
+      return;
+    }
     setIsFetchingEmbed(true);
     setError(null);
     setMainArticleEmbed(null);
@@ -129,21 +133,21 @@ const SubmitCommentaryPage = () => {
   };
 
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">Share Your Commentary</h1>
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg space-y-6">
+    <div className="container mx-auto py-12 max-w-3xl"> {/* Centered and max-width for a more focused writing experience */}
+      <h1 className="text-4xl font-bold text-warm-text-primary mb-10 text-center">Share Your Reflection</h1>
+      <form onSubmit={handleSubmit} className="bg-warm-surface p-10 rounded-xl shadow-xl border border-warm-border-soft space-y-8"> {/* Softer, more padding */}
         <div>
-          <label htmlFor="topic" className="block text-sm font-medium text-gray-700 mb-1">
-            Select Topic <span className="text-red-500">*</span>
+          <label htmlFor="topic" className="block text-lg font-semibold text-warm-text-primary mb-2">
+            Choose a Topic <span className="text-red-500">*</span>
           </label>
           <select
             id="topic"
             value={selectedTopic}
             onChange={(e) => setSelectedTopic(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-4 bg-warm-bg border border-warm-border-medium rounded-lg shadow-sm focus:ring-2 focus:ring-calm-blue-accent focus:border-calm-blue-accent text-warm-text-primary text-md" // Enhanced styling
             required
           >
-            <option value="" disabled>Select a topic</option>
+            <option value="" disabled>Select a topic to reflect on...</option>
             {topics.map(topic => (
               <option key={topic.id} value={topic.id}>{topic.name}</option>
             ))}
@@ -151,8 +155,8 @@ const SubmitCommentaryPage = () => {
         </div>
 
         <div>
-          <label htmlFor="mainArticleUrl" className="block text-sm font-medium text-gray-700 mb-1">
-            Main Article URL <span className="text-red-500">*</span>
+          <label htmlFor="mainArticleUrl" className="block text-lg font-semibold text-warm-text-primary mb-2">
+            Link to the Main Article <span className="text-red-500">*</span>
           </label>
           <input
             type="url"
@@ -164,68 +168,68 @@ const SubmitCommentaryPage = () => {
               setError(null); // Clear error on URL change
             }}
             onBlur={handleFetchEmbed} // Fetch embed on blur
-            className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-4 bg-warm-bg border border-warm-border-medium rounded-lg shadow-sm focus:ring-2 focus:ring-calm-blue-accent focus:border-calm-blue-accent text-warm-text-primary text-md" // Enhanced styling
             placeholder="https://www.example.com/news-article"
             required
           />
-          {isFetchingEmbed && <p className="text-sm text-gray-500 mt-1">Fetching article preview...</p>}
+          {isFetchingEmbed && <p className="text-sm text-warm-text-secondary mt-2">Fetching article preview...</p>}
           {!isFetchingEmbed && mainArticleEmbed && (
-            <div className="mt-4 p-4 border border-gray-200 rounded-md bg-gray-50">
-              <h3 className="text-lg font-semibold text-gray-700">{mainArticleEmbed.title || 'No title available'}</h3>
+            <div className="mt-6 p-6 border border-warm-border-soft rounded-lg bg-warm-bg"> {/* Embed card styling */}
+              <h3 className="text-xl font-semibold text-warm-text-primary">{mainArticleEmbed.title || 'No title available'}</h3>
               {mainArticleEmbed.image && (
-                <img src={mainArticleEmbed.image} alt={mainArticleEmbed.title || 'Article image'} className="my-2 rounded-md max-h-60 w-full object-contain" />
+                <img src={mainArticleEmbed.image} alt={mainArticleEmbed.title || 'Article image'} className="my-3 rounded-lg max-h-72 w-full object-cover border border-warm-border-soft" />
               )}
-              <p className="text-sm text-gray-600 line-clamp-3">{mainArticleEmbed.description || 'No description available'}</p>
-              {mainArticleEmbed.publisher && <p className="text-xs text-gray-500 mt-1">Source: {mainArticleEmbed.publisher}</p>}
-              {mainArticleEmbed.url && <a href={mainArticleEmbed.url} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-500 hover:underline mt-1 block truncate">Read at source: {mainArticleEmbed.url}</a>}
+              <p className="text-md text-warm-text-secondary font-serif line-clamp-4">{mainArticleEmbed.description || 'No description available'}</p>
+              {mainArticleEmbed.publisher && <p className="text-sm text-warm-text-secondary mt-2">Source: {mainArticleEmbed.publisher}</p>}
+              {mainArticleEmbed.url && <a href={mainArticleEmbed.url} target="_blank" rel="noopener noreferrer" className="text-sm text-calm-blue-accent hover:underline mt-1 block truncate">Read at source: {mainArticleEmbed.url}</a>}
             </div>
           )}
-           {!isFetchingEmbed && !mainArticleEmbed && mainArticleUrl && !error && (
-            <p className="text-sm text-yellow-600 mt-1">Could not load preview. Please check the URL or try again.</p>
+           {!isFetchingEmbed && !mainArticleEmbed && mainArticleUrl && !error && ( // Message if URL entered but no preview and no error yet
+            <p className="text-sm text-yellow-600 mt-2">Could not load preview. Please check the URL or try again.</p>
           )}
         </div>
         
-        {/* TODO: Add section for Reference URLs with similar embed fetching */}
+        {/* TODO: Add section for Reference URLs with similar embed fetching and styling */}
 
         <div>
-          <label htmlFor="commentaryText" className="block text-sm font-medium text-gray-700 mb-1">
-            Your Thoughts / Commentary <span className="text-red-500">*</span>
+          <label htmlFor="commentaryText" className="block text-lg font-semibold text-warm-text-primary mb-2">
+            Your Reflection <span className="text-red-500">*</span>
           </label>
           <textarea
             id="commentaryText"
             value={commentaryText}
             onChange={(e) => setCommentaryText(e.target.value)}
-            rows={8}
-            className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Share your reflective insights on the article..."
+            rows={12} // Increased rows for more writing space
+            className="w-full p-4 bg-warm-bg border border-warm-border-medium rounded-lg shadow-sm focus:ring-2 focus:ring-calm-blue-accent focus:border-calm-blue-accent text-warm-text-primary font-serif text-lg leading-relaxed" // Serif font, larger, more line height
+            placeholder="Share your thoughtful insights on the article..."
             required
           />
         </div>
 
         <div>
-          <label htmlFor="tags" className="block text-sm font-medium text-gray-700 mb-1">
-            Tags (comma-separated)
+          <label htmlFor="tags" className="block text-lg font-semibold text-warm-text-primary mb-2">
+            Add Tags <span className="text-sm text-warm-text-secondary">(optional, comma-separated)</span>
           </label>
           <input
             type="text"
             id="tags"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-            placeholder="e.g., ai, ethics, future"
+            className="w-full p-4 bg-warm-bg border border-warm-border-medium rounded-lg shadow-sm focus:ring-2 focus:ring-calm-blue-accent focus:border-calm-blue-accent text-warm-text-primary text-md" // Enhanced styling
+            placeholder="e.g., ai, ethics, future of work"
           />
         </div>
 
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-        {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
+        {error && <p className="text-red-600 text-md text-center bg-red-100 p-3 rounded-lg">{error}</p>}
+        {successMessage && <p className="text-green-600 text-md text-center bg-green-100 p-3 rounded-lg">{successMessage}</p>}
 
-        <div>
+        <div className="pt-4"> {/* Added padding top for button spacing */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50"
+            className="w-full bg-calm-blue-accent hover:bg-calm-blue-accent-hover text-white font-semibold py-4 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 ease-in-out text-lg disabled:opacity-60" // Larger button, new colors
           >
-            {isSubmitting ? 'Submitting...' : 'Submit Commentary'}
+            {isSubmitting ? 'Submitting Reflection...' : 'Publish Your Reflection'}
           </button>
         </div>
       </form>
